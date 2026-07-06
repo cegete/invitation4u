@@ -1,0 +1,608 @@
+/* ==========================================
+   ENVELOPE PAGE
+========================================== */
+
+#envelope-page{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#dff7ff,#c7ebff);
+
+    overflow:hidden;
+
+    z-index:9999;
+
+    transition:1s;
+}
+
+/* ==========================================
+   ENVELOPE
+========================================== */
+
+.envelope{
+
+    position:relative;
+
+    width:420px;
+    height:280px;
+
+    cursor:pointer;
+
+    perspective:1200px;
+    overflow: visible;
+    filter:drop-shadow(0 20px 30px rgba(0,0,0,.18));
+
+}
+
+/* ==========================================
+   LETTER
+========================================== */
+
+.letter{
+
+    position:absolute;
+
+    width:82%;
+    height:88%;
+
+    left:9%;
+    bottom:10px;
+
+    background:white;
+
+    border-radius:12px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    z-index: 4;
+
+    transition:1s cubic-bezier(.22,1,.36,1);
+
+}
+
+.letter h2{
+
+    font-size:48px;
+
+}
+
+.letter h3{
+
+    color:#2678b7;
+
+    margin:8px 0;
+
+}
+
+.letter p{
+
+    color:#777;
+
+}
+
+/* ==========================================
+   STITCH
+========================================== */
+
+.stitch-box{
+
+    position:absolute;
+
+    top:-45px;
+
+    left:50%;
+
+    width:130px;
+
+    height:95px;
+
+    transform:translateX(-50%);
+    display: flex;
+    justify-content: center;
+    overflow:visible;
+    z-index: 9999;
+
+}
+
+.stitch{
+
+    position:absolute;
+
+    width:130px;
+
+    left:50%;
+
+    top:0;
+
+    transition:1s;
+    transform: translateX(-50%);
+    animation:peek 2s ease-in-out infinite;
+    z-index: 10000;
+
+}
+
+@keyframes peek{
+
+    0%{
+        transform:translateY(8px);
+    }
+
+    50%{
+        transform:translateY(0);
+    }
+
+    100%{
+        transform:translateY(8px);
+    }
+
+}
+
+
+/* ==========================================
+   BOTTOM
+========================================== */
+
+.bottom-fold{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:100%;
+
+    background:#79bff3;
+
+    clip-path:polygon(
+        0 100%,
+        50% 55%,
+        100% 100%
+    );
+
+    z-index:4;
+
+}
+
+/* ==========================================
+   LEFT
+========================================== */
+
+.left-fold{
+
+    position:absolute;
+
+    left:0;
+
+    width:50%;
+    height:100%;
+
+    background:#67b3ef;
+
+    clip-path:polygon(
+        0 0,
+        100% 55%,
+        0 100%
+    );
+
+    z-index:5;
+
+}
+
+/* ==========================================
+   RIGHT
+========================================== */
+
+.right-fold{
+
+    position:absolute;
+
+    right:0;
+
+    width:50%;
+    height:100%;
+
+    background:#5faee9;
+
+    clip-path:polygon(
+        100% 0,
+        0 55%,
+        100% 100%
+    );
+
+    z-index:5;
+
+}
+
+/* ==========================================
+   FLAP
+========================================== */
+
+.flap{
+
+    position:absolute;
+
+    top:0;
+
+    width:100%;
+    height:55%;
+
+    background:#5aaae8;
+
+    clip-path:polygon(
+        0 0,
+        50% 100%,
+        100% 0
+    );
+
+    transform-origin:top;
+
+    transition:1s;
+
+    z-index:6;
+
+}
+
+/* ==========================================
+   OPEN
+========================================== */
+
+.open .flap{
+
+    transform:rotateX(180deg);
+    z-index: 2;
+}
+.open .letter{
+    transform: translateY(-140px);
+    z-index: 8;
+}
+
+.open .stitch{
+    animation: stitchUpOpen 1s forwards;
+}
+
+@keyframes stitchUpOpen{
+    from{
+        transform: translateX(-50%) translateY(0);
+    }
+    to{
+        transform: translateX(-50%) translateY(-160px);
+    }
+}
+/* ==========================================
+   LETTER ZOOM
+========================================== */
+
+.zoom{
+
+    animation:zoomLetter .9s forwards;
+
+}
+
+@keyframes zoomLetter{
+
+    from{
+
+        transform:
+            translateY(-150px)
+            scale(1);
+
+        opacity:1;
+
+    }
+
+    to{
+
+        transform:
+            translateY(-150px)
+            scale(5);
+
+        opacity:0;
+
+    }
+
+}
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+#main-content{
+
+    display:none;
+
+    opacity:0;
+
+    transition:1s;
+
+}
+
+#main-content.show{
+
+    display:block;
+
+    opacity:1;
+
+}
+
+/* =======================
+IMAGE ANIMATION
+======================= */
+
+.gallery-grid img{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:1s;
+
+}
+
+.gallery-grid img.show-image{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* =======================
+TIMELINE
+======================= */
+
+.timeline-item{
+
+    opacity:0;
+
+    transform:translateX(-80px);
+
+    transition:1s;
+
+}
+
+.timeline-item.show-item{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+.hero img{
+
+    width:230px;
+
+}
+
+.hero h1{
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:80px;
+
+    color:#2678b7;
+
+}
+
+.hero h3{
+
+    color:#4b9bd3;
+
+}
+
+.bride-name{
+
+    margin-top:15px;
+
+    color:#2678b7;
+
+}
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:25px;
+
+    padding:15px 28px;
+
+    border-radius:35px;
+
+    background:#63b5f5;
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+.title{
+
+    text-align:center;
+
+    margin-bottom:40px;
+
+    font-size:60px;
+
+    color:#2678b7;
+
+    font-family:"Great Vibes",cursive;
+
+}
+
+section{
+
+    padding:80px 10%;
+
+}
+
+.gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+.gallery-grid img{
+
+    width:100%;
+
+    height:280px;
+
+    object-fit:cover;
+
+    border-radius:18px;
+
+}
+
+.timeline-item{
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border-left:6px solid #63b5f5;
+
+    border-radius:12px;
+
+}
+
+.event-card{
+
+    max-width:600px;
+
+    margin:auto;
+
+    padding:40px;
+
+    background:white;
+
+    border-radius:20px;
+
+    text-align:center;
+
+}
+
+.message-card{
+
+    max-width:800px;
+
+    margin:auto;
+
+    padding:45px;
+
+    background:white;
+
+    border-radius:20px;
+
+    line-height:2;
+
+    text-align:center;
+
+}
+
+footer{
+
+    padding:60px;
+
+    text-align:center;
+
+}
+
+footer img{
+
+    width:180px;
+
+}
+/* ===========================
+HOVER
+=========================== */
+
+.envelope{
+
+    transition:.4s;
+
+}
+
+.envelope:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* ===========================
+OPEN ANIMATION
+=========================== */
+
+.open .letter{
+
+    animation:letterUp 1s forwards;
+
+}
+
+@keyframes letterUp{
+
+    from{
+
+        transform:translateY(0);
+
+    }
+
+    to{
+
+        transform:translateY(-140px);
+
+    }
+
+}
+
+.open .stitch{
+
+    animation:stitchUp 1s forwards;
+
+}
+
+@keyframes stitchUp{
+
+    from{
+
+        transform:translateX(-50%) translateY(0);
+
+    }
+
+    to{
+
+        transform:translateX(-50%) translateY(-90px);
+
+    }
+
+}
